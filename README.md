@@ -1,9 +1,7 @@
 # Crawly
-
 A concurrent web crawler written in Go. Given a starting URL, it recursively crawls all pages within the same domain and outputs a structured JSON report.
 
 ## Features
-
 - Concurrent crawling with configurable parallelism
 - Stays within the origin domain (no external links followed)
 - Deduplicates visited URLs
@@ -11,16 +9,32 @@ A concurrent web crawler written in Go. Given a starting URL, it recursively cra
 - Extracts per-page data: heading, first paragraph, outgoing links, and images
 - Outputs a sorted JSON report
 
-## Building
-
+## Installation
+If you have Go installed, you can install crawly directly:
+```bash
+go install github.com/shubhampatil-7/crawly@latest
 ```
+Then run it from anywhere:
+```bash
+crawly <url> <maxConcurrency> <maxPages>
+```
+> If `crawly` is not found after installing, add Go's bin to your PATH:
+> ```bash
+> export PATH=$PATH:$(go env GOPATH)/bin
+> ```
+> Add that line to your `~/.zshrc` or `~/.bashrc` to make it permanent.
+
+## Building from Source
+```
+git clone https://github.com/shubhampatil-7/crawly.git
+cd crawly
 go build -o crawly .
 ./crawly https://example.com 5 100
 ```
-## Usage
 
+## Usage
 ```
-go run . <url> <maxConcurrency> <maxPages>
+crawly <url> <maxConcurrency> <maxPages>
 ```
 
 | Argument         | Description                                      |
@@ -30,17 +44,13 @@ go run . <url> <maxConcurrency> <maxPages>
 | `maxPages`       | Maximum number of pages to crawl before stopping |
 
 ### Example
-
 ```
-go run . https://example.com 5 100
+crawly https://example.com 5 100
 ```
-
-This crawls `https://example.com` with up to 5 concurrent workers, stopping after 100 pages. Results are written to `report.json`.
+This crawls `https://example.com` with up to 5 concurrent workers, stopping after 100 pages. Results are written to `report.json` in the directory where you ran the command.
 
 ## Output
-
 `report.json` contains a sorted array of page objects:
-
 ```json
 [
   {
@@ -54,7 +64,6 @@ This crawls `https://example.com` with up to 5 concurrent workers, stopping afte
 ```
 
 ## Project Structure
-
 | File                   | Description                                            |
 | ---------------------- | ------------------------------------------------------ |
 | `main.go`              | Entry point, argument parsing, crawl orchestration     |
@@ -65,7 +74,4 @@ This crawls `https://example.com` with up to 5 concurrent workers, stopping afte
 | `jsonreport.go`        | Writes the sorted JSON report to disk                  |
 
 ## Dependencies
-
 - [goquery](https://github.com/PuerkitoBio/goquery) — HTML parsing and querying
-
-
