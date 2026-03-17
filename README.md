@@ -11,6 +11,12 @@ A concurrent web crawler written in Go. Given a starting URL, it recursively cra
 - Extracts per-page data: heading, first paragraph, outgoing links, and images
 - Outputs a sorted JSON report
 
+## Building
+
+```
+go build -o crawly .
+./crawly https://example.com 5 100
+```
 ## Usage
 
 ```
@@ -62,9 +68,4 @@ This crawls `https://example.com` with up to 5 concurrent workers, stopping afte
 
 - [goquery](https://github.com/PuerkitoBio/goquery) — HTML parsing and querying
 
-## Building
 
-```
-go build -o crawly .
-./crawly https://example.com 5 100
-```
