@@ -1,4 +1,4 @@
-module github.com/shubhampatil-7/crawler
+module github.com/shubhampatil-7/crawly
 
 go 1.25.0
 
